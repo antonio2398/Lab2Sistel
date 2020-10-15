@@ -36,6 +36,22 @@ public class Ws_tienda {
         Tienda miTienda = new Tienda();
         return miTienda.consultarPrimerCliente();
     }
+    @GET
+    @Path("consultarUltimoEmpleado")
+    @Produces({"application/json"})
+    public String consultarUltimoEmpleado(){
+        Tienda miTienda = new Tienda();
+        return miTienda.consultarUltimoEmpleado();
+    } 
     
+    @GET
+    @Path("consultarUltimosProductos")
+    @Produces({"application/json"})
+    public String consultarUltimosProductos(){
+        Tienda miTienda = new Tienda();
+        return miTienda.consultarUltimosProductos();
+    } 
+    
+       
     
 }
