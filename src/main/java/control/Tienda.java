@@ -96,11 +96,11 @@ public class Tienda {
         Document document = null;
 
         try {
-            document = new Document("_id", new ObjectId(id));
+            document = new Document("_id", new ObjectId(id)); //"5f7f787103a65fd7b5009327"
         } catch (Exception e) {
             web = e.toString();
             excepcion = true;
-            web += " ,EL identificador no es valido";
+            web += " ,EL id no es valido";
         }
 
         if (!excepcion) {
@@ -133,11 +133,11 @@ public class Tienda {
         Document document = null;
 
         try {
-            document = new Document("_id", new ObjectId(id));
+            document = new Document("_id", new ObjectId(id)); //"5f7f77e603a65fd7b500931d"
         } catch (Exception e) {
             web = e.toString();
             excepcion = true;
-            web += " ,EL identificador no es valido";
+            web += " ,EL id no es valido";
         }
         if (!excepcion) {
             MongoCursor<Document> resultado = null;
