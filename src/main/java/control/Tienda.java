@@ -11,6 +11,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -77,6 +78,82 @@ public class Tienda {
             web += resultado.next().toJson() + " \n\n";
         }
         return web;
+    }
+    public String eliminarFactura(String id) {
+
+        String web = "";
+
+        MongoClient mongoClient;
+        MongoClientURI uri = new MongoClientURI("mongodb://userLab2:passworduserLab2@93.188.167.110:27017/?authSource=lab2");
+        mongoClient = new MongoClient(uri);
+
+        MongoDatabase db;
+        db = mongoClient.getDatabase("lab2");
+
+        MongoCollection<Document> collection = db.getCollection("facturas");
+
+        boolean excepcion = false;
+        Document document = null;
+
+        try {
+            document = new Document("_id", new ObjectId(id));
+        } catch (Exception e) {
+            web = e.toString();
+            excepcion = true;
+            web += " ,EL identificador no es valido";
+        }
+
+        if (!excepcion) {
+            MongoCursor<Document> resultado = null;
+            resultado = collection.find(document).iterator();
+            if (resultado != null) {
+                web = resultado.toString();
+
+            } else {
+                web = "El documento fue eliminado";
+                Document resultDocument = collection.findOneAndDelete(document);
+            }
+        }
+        return web;
+    }
+
+    public String actualizarDocumento(String id) {
+
+        String web = "";
+        MongoClient mongoClient;
+        MongoClientURI uri = new MongoClientURI("mongodb://userLab2:passworduserLab2@93.188.167.110:27017/?authSource=lab2");
+        mongoClient = new MongoClient(uri);
+
+        MongoDatabase db;
+        db = mongoClient.getDatabase("lab2");
+
+        MongoCollection<Document> collection = db.getCollection("proveedores");
+
+        boolean excepcion = false;
+        Document document = null;
+
+        try {
+            document = new Document("_id", new ObjectId(id));
+        } catch (Exception e) {
+            web = e.toString();
+            excepcion = true;
+            web += " ,EL identificador no es valido";
+        }
+        if (!excepcion) {
+            MongoCursor<Document> resultado = null;
+            resultado = collection.find(document).iterator();
+            if (resultado != null) {
+                web = resultado.toString();
+
+            } else {
+                web = "El documento fue actualizado";
+                
+                Document updateDocument = new Document("$set", new Document("nombre", "Juan"));
+                Document resultDocument = collection.findOneAndUpdate(document, updateDocument);
+            }
+        }
+        return web;
+
     }
    
 }

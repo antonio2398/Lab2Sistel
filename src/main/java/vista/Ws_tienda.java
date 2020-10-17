@@ -52,6 +52,21 @@ public class Ws_tienda {
         return miTienda.consultarUltimosProductos();
     } 
     
+    @GET
+    @Path("eliminarFactura")
+    @Produces({"application/json"})
+    public String eliminarFactura(String id){
+        Tienda miTienda = new Tienda();
+        return miTienda.eliminarFactura(id);
+    } 
+    
+    @GET
+    @Path("actualizarDocumento")
+    @Produces({"application/json"})
+    public String actualizarDocumento(String id){
+        Tienda miTienda = new Tienda();
+        return miTienda.actualizarDocumento(id);
+    }
        
     
 }
